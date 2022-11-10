@@ -1,19 +1,18 @@
-# Recording a video using the webcam for 30 seconds and taking a picture every 5 seconds and saving it to a folder called \"Melek\"
-# The video will be saved to a folder called \"Videos\"
-# The video will be saved as \"Melek.mp4\"
-# The pictures will be saved as \"Melek_1.jpg\", \"Melek_2.jpg\", \"Melek_3.jpg\", etc.
+# Recording a video using the webcam for 30 seconds and taking a picture every 5 seconds and saving it to a folder called \"known_faces\"
+# The video will be deleted after the pictures are taken
+# The pictures will be saved as \"face_1.jpg\", \"face_2.jpg\", \"face_3.jpg\", etc.
 
 import cv2
 import time
 import os
 
 # create a folder called "Melek" if it doesn't exist
-if not os.path.exists("Melek"):
-    os.makedirs("Melek")
+if not os.path.exists("known_faces/melek"):
+    os.makedirs("known_faces/melek")
 
-# create a folder called "Videos" if it doesn't exist
-if not os.path.exists("Videos"):
-    os.makedirs("Videos")
+# delete the video if it exists
+if os.path.exists("face.mp4"):
+    os.remove("face.mp4")
 
 # create a VideoCapture object
 cap = cv2.VideoCapture(0)
@@ -38,7 +37,7 @@ num_pictures = num_seconds // picture_interval
 fourcc = cv2.VideoWriter_fourcc(*"mp4v")
 
 # set the video file name
-video_file_name = "Videos/Melek.mp4"
+video_file_name = "Videos/faces.mp4"
 
 # set the video file path
 video_file_path = os.path.join(os.getcwd(), video_file_name)
@@ -68,7 +67,7 @@ while current_time - start_time < num_seconds:
         if current_time - start_time > num_pictures_taken * picture_interval:
     
             # set the picture file name
-            picture_file_name = "Melek/Melek_" + str(num_pictures_taken + 1) + ".jpg"
+            picture_file_name = "known_faces/melek/face_" + str(num_pictures_taken + 1) + ".jpg"
     
             # set the picture file path
             picture_file_path = os.path.join(os.getcwd(), picture_file_name)

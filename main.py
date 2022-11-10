@@ -4,7 +4,7 @@ import os
 
 KNOWN_FACES_DIR = 'known_faces'
 UNKNOWN_FACES_DIR = 'unknown_faces'
-TOLERANCE = 0.6
+TOLERANCE = 0.5
 FRAME_THICKNESS = 3
 FONT_THICKNESS = 2
 MODEL = 'hog'  # default: 'hog', other one can be 'cnn' - CUDA accelerated (if available) deep-learning pretrained model
@@ -19,7 +19,7 @@ known_faces = []
 known_names = []
 
 for name in os.listdir(KNOWN_FACES_DIR):
-    for filename in os.listdir(f"KNOWN_FACES_DIR/{name}"):
+    for filename in os.listdir(f"{KNOWN_FACES_DIR}/{name}"):
         image = face_recognition.load_image_file(f"{KNOWN_FACES_DIR}/{name}/{filename}")
         encoding = face_recognition.face_encodings(image)[0]
         known_faces.append(encoding)
