@@ -5,7 +5,7 @@ import os
 KNOWN_FACES_DIR = 'known_faces'
 UNKNOWN_FACES_DIR = 'unknown_faces'
 TOLERANCE = 0.5
-FRAME_THICKNESS = 3
+FRAME_THICKNESS = 2
 FONT_THICKNESS = 2
 MODEL = 'hog'  # default: 'hog', other one can be 'cnn' - CUDA accelerated (if available) deep-learning pretrained model
 # what is hog ?
@@ -49,7 +49,7 @@ for filename in os.listdir(UNKNOWN_FACES_DIR):
             top_left = (face_location[3], face_location[2])
             bottom_right = (face_location[1], face_location[2]+22)
             cv2.rectangle(image, top_left, bottom_right, color, cv2.FILLED)
-            cv2.putText(image, match, (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), FONT_THICKNESS)
+            cv2.putText(image, match, (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 0, 200), FONT_THICKNESS)
 
     cv2.imshow(filename, image)
     cv2.waitKey(0)
