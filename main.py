@@ -14,3 +14,4 @@ result = face_recognition.compare_faces([image1_encoding], image2_encoding)
 print(result)
 
 cv2.waitKey(0)
+# aaa
