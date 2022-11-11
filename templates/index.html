@@ -16,18 +16,15 @@
             align-items: center;
         }
     </style>
-
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script> 
 </head>
 <body>
-    <video id="video" width="640" height="480" autoplay muted></video>
-    <py-script src="../script.py">
-        from datetime import datetime
-        now = datetime.now()
-        now.strftime("%m/%d/%Y, %H:%M:%S")
-    </py-script>
-        
-    </py-script>
-</body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8  offset-lg-2">
+                <h3 class="mt-5">Live Streaming</h3>
+                <img src="{{ url_for('video_feed') }}" width="100%">
+            </div>
+        </div>
+    </div>
+    </body>
 </html>
