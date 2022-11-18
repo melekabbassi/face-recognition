@@ -2,6 +2,9 @@ from fastapi import FastAPI
 import pickle
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+# upload file to server and save it in images folder (unknown_faces) to be used for face recognition
+from fastapi import FastAPI, File, UploadFile
+import shutil
 
 matches = pickle.load(open("matches.pkl", "rb"))
 
@@ -35,3 +38,9 @@ def get_matched_faces():
 @app.get("/matched_faces/{index}")
 def get_matched_face(index: int):
     return FileResponse(f"matched_faces/{index}.jpg")
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    with open(f"unknown_faces/{file.filename}", "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    return {"filename": file.filename}
