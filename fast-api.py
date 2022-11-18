@@ -26,7 +26,12 @@ app.add_middleware(
 def get_matches():
     return {"matches": matches}
 
-# display all images in matched_faces folder in the browser
-@app.get("/matched_faces/{filename}")
-def get_matched_faces(filename: str):
-    return FileResponse(f"matched_faces/{filename}")
+# display all images in matched_faces folder in the browser using yield
+@app.get("/matched_faces")
+def get_matched_faces():
+    for i in range(len(matches)):
+        yield FileResponse(f"matched_faces/{i}.jpg")
+
+@app.get("/matched_faces/{index}")
+def get_matched_face(index: int):
+    return FileResponse(f"matched_faces/{index}.jpg")
