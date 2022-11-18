@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import pickle
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 matches = pickle.load(open("matches.pkl", "rb"))
 
@@ -24,3 +25,8 @@ app.add_middleware(
 @app.get("/matches")
 def get_matches():
     return {"matches": matches}
+
+# display all images in matched_faces folder in the browser
+@app.get("/matched_faces/{filename}")
+def get_matched_faces(filename: str):
+    return FileResponse(f"matched_faces/{filename}")

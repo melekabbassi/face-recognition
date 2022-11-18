@@ -52,9 +52,16 @@ for filename in os.listdir(UNKNOWN_FACES_DIR):
             bottom_right = (face_location[1], face_location[2]+22)
             cv2.rectangle(image, top_left, bottom_right, color, cv2.FILLED)
             cv2.putText(image, match, (face_location[3]+10, face_location[2]+15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 0, 200), FONT_THICKNESS)
-            
+
             matches.append(match)
             pickle.dump(matches, open("matches.pkl", "wb"))
+
+            # create a folder matched_faces if it doesn't exist already and save the matched faces in it
+            if not os.path.exists("matched_faces"):
+                os.mkdir("matched_faces")
+            cv2.imwrite(f"matched_faces/{filename}", image)
+
+
 
     cv2.imshow(filename, image)
     cv2.waitKey(0)
