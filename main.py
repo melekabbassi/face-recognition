@@ -57,12 +57,17 @@ for filename in os.listdir(UNKNOWN_FACES_DIR):
             pickle.dump(matches, open("matches.pkl", "wb"))
 
             # create a folder matched_faces if it doesn't exist already and save the matched faces in it
-            # the name of the images should be numbers starting from 0
+            # the name of the images should be numbers starting from 0            
+
             if not os.path.exists("matched_faces"):
                 os.mkdir("matched_faces")
-            cv2.imwrite(f"matched_faces/{len(os.listdir('matched_faces'))}.jpg", image)
+                cv2.imwrite(f"matched_faces/0.jpg", image)
+            else:
+                cv2.imwrite(f"matched_faces/{len(os.listdir('matched_faces'))}.jpg", image)
 
-
+            # if not os.path.exists("matched_faces"):
+            #     os.mkdir("matched_faces")
+            # cv2.imwrite(f"matched_faces/{len(os.listdir('matched_faces'))}.jpg", image)
 
     cv2.imshow(filename, image)
     cv2.waitKey(0)
